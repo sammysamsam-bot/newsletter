@@ -8,13 +8,14 @@ export async function getStaticPaths() {
     { params: { category: 'ai' } },
     { params: { category: 'science' } },
     { params: { category: 'politics' } },
+    { params: { category: 'blogs' } },
     { params: { category: 'food' } },
     { params: { category: 'podcasts' } },
   ];
 }
 
 const { category } = Astro.params;
-const cat = category as 'tech' | 'ai' | 'science' | 'politics' | 'food' | 'podcasts';
+const cat = category as 'tech' | 'ai' | 'science' | 'politics' | 'blogs' | 'food' | 'podcasts';
 
 const briefs = await getCollection('briefs', (b) => b.data.category === cat);
 briefs.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
@@ -24,6 +25,7 @@ const labels: Record<string, string> = {
   ai: 'AI Industry',
   science: 'Science & Research',
   politics: 'Politics',
+  blogs: 'Industry Blogs',
   food: 'Food & Restaurants',
   podcasts: 'Podcasts',
 };
