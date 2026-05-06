@@ -3,13 +3,13 @@
 :root {
   --paper: #F4F1EA;
   --ink: #1A1A1A;
-  --ink-soft: #444;
+  --ink-soft: #3A3A36;
   --ink-faint: #6E6A60;
   --red: #A33A33;
   --rule: #C4BFB4;
   --rule-strong: #888070;
   --max-width: 720px;
-  --page-width: 960px;
+  --page-width: 920px;
 }
 
 * { box-sizing: border-box; }
@@ -20,8 +20,8 @@ html, body {
   background: var(--paper);
   color: var(--ink);
   font-family: 'Newsreader', Georgia, 'Times New Roman', serif;
-  font-size: 18px;
-  line-height: 1.55;
+  font-size: 19px;
+  line-height: 1.7;
   font-feature-settings: "kern", "liga", "onum";
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -37,88 +37,79 @@ a {
 }
 a:hover { color: var(--red); }
 
-/* MASTHEAD */
+/* MASTHEAD — restrained, lets words breathe */
 .masthead {
   border-bottom: 1px solid var(--rule);
-  padding: 40px 24px 0;
+  padding: 28px 24px 14px;
   text-align: center;
   max-width: var(--page-width);
   margin: 0 auto;
 }
 .masthead h1 {
   font-family: 'Newsreader', Georgia, serif;
-  font-weight: 800;
-  font-size: clamp(48px, 9vw, 96px);
-  line-height: 0.95;
+  font-weight: 700;
+  font-size: clamp(32px, 5vw, 48px);
+  line-height: 1;
   margin: 0;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.02em;
 }
 .masthead h1 a {
   color: var(--ink);
   text-decoration: none;
 }
-.masthead .tagline {
-  font-style: italic;
-  font-size: 16px;
-  color: var(--ink-soft);
-  margin: 12px 0 20px;
-  font-weight: 400;
-}
 .masthead .dateline {
-  font-size: 12px;
+  font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--red);
-  border-top: 1px solid var(--rule);
-  border-bottom: 1px solid var(--rule);
-  padding: 10px 0;
-  margin-top: 8px;
+  margin-top: 14px;
   font-weight: 500;
 }
 
 /* TABS */
 .tabs {
   display: flex;
-  gap: 28px;
+  gap: 22px;
   justify-content: center;
   flex-wrap: wrap;
-  padding: 18px 24px;
-  border-bottom: 2px solid var(--ink);
+  padding: 14px 24px;
+  border-bottom: 1px solid var(--rule);
   max-width: var(--page-width);
   margin: 0 auto;
 }
 .tabs a {
   font-family: 'Newsreader', serif;
   font-size: 13px;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   text-decoration: none;
-  color: var(--ink);
+  color: var(--ink-soft);
   padding: 4px 0;
-  border-bottom: 2px solid transparent;
-  font-weight: 500;
-  margin-bottom: -2px;
+  border-bottom: 1px solid transparent;
+  font-weight: 400;
+  margin-bottom: -1px;
 }
 .tabs a:hover { color: var(--red); }
 .tabs a.active {
   border-bottom-color: var(--red);
   color: var(--red);
+  font-weight: 500;
 }
 
 /* MAIN */
 main {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 48px 24px 64px;
+  padding: 48px 24px 72px;
 }
 
-/* SKIM (lead pull) */
+/* SKIM (lead pull) — quieter */
 .skim {
   font-style: italic;
   font-size: 19px;
-  line-height: 1.55;
-  border-left: 3px solid var(--red);
-  padding: 4px 0 4px 18px;
+  line-height: 1.6;
+  border-left: 2px solid var(--red);
+  padding: 2px 0 2px 16px;
   margin: 0 0 56px;
   color: var(--ink-soft);
 }
@@ -134,72 +125,65 @@ main {
 
 .section-label {
   font-family: 'Newsreader', serif;
-  font-size: 12px;
+  font-size: 11px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--red);
-  margin: 0 0 24px;
-  font-weight: 600;
+  margin: 0 0 28px;
+  font-weight: 500;
 }
 
-/* ITEMS (rendered from markdown) */
+/* ITEMS — generous spacing for reading */
 .brief-section h3 {
   font-family: 'Newsreader', serif;
   font-weight: 700;
-  font-size: 24px;
-  line-height: 1.22;
-  margin: 32px 0 14px;
-  letter-spacing: -0.01em;
+  font-size: 22px;
+  line-height: 1.3;
+  margin: 40px 0 16px;
+  letter-spacing: -0.005em;
 }
 .brief-section h3:first-child {
   margin-top: 0;
 }
 
 .brief-section p {
-  margin: 0 0 14px;
-  font-size: 18px;
-  line-height: 1.65;
-}
-
-.brief-section em em {
-  font-style: normal;
-}
-
-/* drop cap on first paragraph after first headline of each section */
-.brief-section h3:first-of-type + p::first-letter {
-  font-size: 64px;
-  font-weight: 800;
-  line-height: 0.85;
-  float: left;
-  padding: 6px 8px 0 0;
-  font-family: 'Newsreader', Georgia, serif;
+  margin: 0 0 16px;
+  font-size: 19px;
+  line-height: 1.7;
   color: var(--ink);
 }
 
-/* note paragraph (italic — used for politics-imbalance disclaimer etc.) */
+/* DUAL-VIEW: blockquote = the "summary with context" lead.
+   The full body paragraphs follow as breakdown. */
 .brief-section blockquote {
   border-left: 2px solid var(--rule-strong);
   margin: 0 0 24px;
-  padding: 4px 0 4px 16px;
-  font-style: italic;
-  color: var(--ink-faint);
-  font-size: 16px;
+  padding: 2px 0 2px 16px;
+  color: var(--ink-soft);
 }
-
 .brief-section blockquote p {
-  margin: 0;
-  font-size: 16px;
+  margin: 0 0 10px;
+  font-size: 17px;
+  line-height: 1.65;
+  font-style: italic;
+}
+.brief-section blockquote p:last-child { margin-bottom: 0; }
+.brief-section blockquote strong {
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--ink);
 }
 
-/* CATEGORY PAGE */
+/* CATEGORY PAGE HEADING */
 .page-heading {
   font-family: 'Newsreader', serif;
-  font-size: 36px;
+  font-size: 28px;
   font-weight: 700;
   margin: 0 0 8px;
-  letter-spacing: -0.015em;
-  border-bottom: 2px solid var(--ink);
-  padding-bottom: 12px;
+  letter-spacing: -0.01em;
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 14px;
   margin-bottom: 40px;
 }
 
@@ -213,11 +197,11 @@ main {
 .dateline-small {
   display: inline-block;
   font-size: 11px;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
   color: var(--red);
   text-transform: uppercase;
   text-decoration: none;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
   font-weight: 500;
 }
 .dateline-small:hover { text-decoration: underline; }
@@ -276,23 +260,20 @@ footer a {
 
 /* MOBILE */
 @media (max-width: 640px) {
-  body { font-size: 17px; }
-  .masthead { padding: 24px 16px 0; }
-  .masthead h1 { font-size: 56px; line-height: 0.92; }
-  .masthead .tagline { font-size: 15px; margin: 8px 0 14px; }
-  .masthead .dateline { font-size: 11px; padding: 8px 0; }
-  .tabs { gap: 18px; padding: 14px 16px; }
-  .tabs a { font-size: 12px; letter-spacing: 0.12em; }
+  body { font-size: 18px; line-height: 1.65; }
+  .masthead { padding: 22px 16px 12px; }
+  .masthead h1 { font-size: 32px; }
+  .masthead .dateline { font-size: 10px; margin-top: 12px; }
+  .tabs { gap: 16px; padding: 12px 16px; }
+  .tabs a { font-size: 12px; letter-spacing: 0.06em; }
   main { padding: 32px 18px 48px; }
   .skim { font-size: 17px; margin-bottom: 40px; padding-left: 14px; }
   .brief-section { margin-bottom: 40px; }
   .brief-section + .brief-section { padding-top: 28px; }
-  .brief-section h3 { font-size: 21px; }
-  .brief-section p { font-size: 17px; line-height: 1.62; }
-  .brief-section h3:first-of-type + p::first-letter {
-    font-size: 56px;
-  }
-  .page-heading { font-size: 28px; margin-bottom: 28px; }
+  .brief-section h3 { font-size: 20px; margin-top: 32px; }
+  .brief-section p { font-size: 18px; line-height: 1.65; }
+  .brief-section blockquote p { font-size: 16px; }
+  .page-heading { font-size: 24px; margin-bottom: 28px; }
   .archive-list a { font-size: 16px; flex-direction: column; gap: 4px; }
   .archive-list .date { font-size: 11px; }
 }
