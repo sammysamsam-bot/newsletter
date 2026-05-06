@@ -1,0 +1,53 @@
+---
+import { getCollection } from 'astro:content';
+import Broadsheet from '../../layouts/Broadsheet.astro';
+
+export async function getStaticPaths() {
+  const all = await getCollection('briefs');
+  const dates = new Set(all.map((b) => b.data.date.toISOString().split('T')[0]));
+  return Array.from(dates).map((d) => ({ params: { date: d } }));
+}
+
+const { date } = Astro.params;
+const briefs = await getCollection(
+  'briefs',
+  (b) => b.data.date.toISOString().split('T')[0] === date
+);
+
+const order = ['tech', 'ai', 'science', 'politics', 'food', 'podcasts'];
+briefs.sort((a, b) => order.indexOf(a.data.category) - order.indexOf(b.data.category));
+
+const labels: Record<string, string> = {
+  tech: 'Tech & Startups',
+  ai: 'AI Industry',
+  science: 'Science & Research',
+  politics: 'Politics',
+  food: 'Food & Restaurants',
+  podcasts: 'Podcasts',
+};
+
+const dateObj = briefs[0]?.data.date;
+const formattedDate = dateObj
+  ? dateObj.toLocaleDateString('en-US', {
+      weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC',
+    }).toUpperCase()
+  : '';
+
+const skim = briefs.find((b) => b.data.summary)?.data.summary;
+
+const rendered = await Promise.all(
+  briefs.map(async (b) => {
+    const { Content } = await b.render();
+    return { brief: b, Content };
+  })
+);
+---
+<Broadsheet title={`${formattedDate} — Broadsheet`} date={formattedDate}>
+  {skim && <p class="skim">{skim}</p>}
+  {rendered.map(({ brief, Content }) => (
+    <section class="brief-section">
+      <p class="section-label">{labels[brief.data.category]}</p>
+      <Content />
+    </section>
+  ))}
+</Broadsheet>

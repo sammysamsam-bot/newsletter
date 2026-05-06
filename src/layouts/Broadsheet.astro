@@ -1,0 +1,56 @@
+---
+import '../styles/broadsheet.css';
+
+interface Props {
+  title?: string;
+  date?: string;
+  description?: string;
+}
+
+const { title = "Broadsheet", date, description = "A daily editorial — curated by Sam." } = Astro.props;
+const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
+
+const tabs = [
+  { name: 'All',      href: '/' },
+  { name: 'Tech',     href: '/tech' },
+  { name: 'AI',       href: '/ai' },
+  { name: 'Science',  href: '/science' },
+  { name: 'Politics', href: '/politics' },
+  { name: 'Food',     href: '/food' },
+  { name: 'Podcasts', href: '/podcasts' },
+];
+
+function isActive(href: string) {
+  if (href === '/') return pathname === '/';
+  return pathname === href || pathname.startsWith(href + '/');
+}
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="alternate" type="application/rss+xml" title="Broadsheet" href="/feed.xml" />
+  <title>{title}</title>
+</head>
+<body>
+  <header class="masthead">
+    <h1><a href="/">Broadsheet</a></h1>
+    <p class="tagline">A daily editorial — curated by Sam</p>
+    {date && <div class="dateline">{date}</div>}
+  </header>
+  <nav class="tabs">
+    {tabs.map(tab => (
+      <a href={tab.href} class:list={[{ active: isActive(tab.href) }]}>{tab.name}</a>
+    ))}
+  </nav>
+  <main>
+    <slot />
+  </main>
+  <footer>
+    <p>Curated by Sam · <a href="/feed.xml">RSS</a> · <a href="/archive">Archive</a></p>
+  </footer>
+</body>
+</html>

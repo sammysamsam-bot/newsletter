@@ -1,0 +1,35 @@
+---
+import { getCollection } from 'astro:content';
+import Broadsheet from '../layouts/Broadsheet.astro';
+
+const all = await getCollection('briefs');
+const byDate = new Map<string, { date: Date; count: number }>();
+for (const b of all) {
+  const key = b.data.date.toISOString().split('T')[0];
+  if (!byDate.has(key)) byDate.set(key, { date: b.data.date, count: 0 });
+  byDate.get(key)!.count++;
+}
+const dates = Array.from(byDate.entries()).sort((a, b) => (a[0] < b[0] ? 1 : -1));
+---
+<Broadsheet title="Archive — Broadsheet">
+  <h2 class="page-heading">Archive</h2>
+  {dates.length === 0 && (
+    <p class="empty-state">Archive is empty for now.</p>
+  )}
+  <ul class="archive-list">
+    {dates.map(([key, info]) => {
+      const formatted = info.date.toLocaleDateString('en-US', {
+        weekday: 'short', month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC',
+      });
+      const sectionWord = info.count === 1 ? 'section' : 'sections';
+      return (
+        <li>
+          <a href={`/issues/${key}`}>
+            <span class="title">{formatted}</span>
+            <span class="date">{info.count} {sectionWord}</span>
+          </a>
+        </li>
+      );
+    })}
+  </ul>
+</Broadsheet>

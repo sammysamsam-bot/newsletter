@@ -1,0 +1,56 @@
+---
+import { getCollection } from 'astro:content';
+import Broadsheet from '../layouts/Broadsheet.astro';
+
+const allBriefs = await getCollection('briefs');
+
+const byDate = new Map<string, typeof allBriefs>();
+for (const b of allBriefs) {
+  const dateKey = b.data.date.toISOString().split('T')[0];
+  if (!byDate.has(dateKey)) byDate.set(dateKey, []);
+  byDate.get(dateKey)!.push(b);
+}
+const dates = Array.from(byDate.keys()).sort().reverse();
+const latest = dates[0];
+const latestBriefs = latest ? byDate.get(latest)! : [];
+
+const order = ['tech', 'ai', 'science', 'politics', 'food', 'podcasts'];
+latestBriefs.sort((a, b) => order.indexOf(a.data.category) - order.indexOf(b.data.category));
+
+const labels: Record<string, string> = {
+  tech: 'Tech & Startups',
+  ai: 'AI Industry',
+  science: 'Science & Research',
+  politics: 'Politics',
+  food: 'Food & Restaurants',
+  podcasts: 'Podcasts',
+};
+
+const dateObj = latestBriefs[0]?.data.date;
+const formattedDate = dateObj
+  ? dateObj.toLocaleDateString('en-US', {
+      weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC',
+    }).toUpperCase()
+  : '';
+
+const skim = latestBriefs.find(b => b.data.summary)?.data.summary;
+
+const rendered = await Promise.all(
+  latestBriefs.map(async (b) => {
+    const { Content } = await b.render();
+    return { brief: b, Content };
+  })
+);
+---
+<Broadsheet title="Broadsheet" date={formattedDate}>
+  {skim && <p class="skim">{skim}</p>}
+  {rendered.length === 0 && (
+    <p class="empty-state">No briefs published yet.</p>
+  )}
+  {rendered.map(({ brief, Content }) => (
+    <section class="brief-section">
+      <p class="section-label">{labels[brief.data.category]}</p>
+      <Content />
+    </section>
+  ))}
+</Broadsheet>

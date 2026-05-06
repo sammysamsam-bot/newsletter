@@ -1,0 +1,53 @@
+---
+import { getCollection } from 'astro:content';
+import Broadsheet from '../layouts/Broadsheet.astro';
+
+export async function getStaticPaths() {
+  return [
+    { params: { category: 'tech' } },
+    { params: { category: 'ai' } },
+    { params: { category: 'science' } },
+    { params: { category: 'politics' } },
+    { params: { category: 'food' } },
+    { params: { category: 'podcasts' } },
+  ];
+}
+
+const { category } = Astro.params;
+const cat = category as 'tech' | 'ai' | 'science' | 'politics' | 'food' | 'podcasts';
+
+const briefs = await getCollection('briefs', (b) => b.data.category === cat);
+briefs.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const labels: Record<string, string> = {
+  tech: 'Tech & Startups',
+  ai: 'AI Industry',
+  science: 'Science & Research',
+  politics: 'Politics',
+  food: 'Food & Restaurants',
+  podcasts: 'Podcasts',
+};
+
+const rendered = await Promise.all(
+  briefs.map(async (b) => {
+    const { Content } = await b.render();
+    const dateStr = b.data.date.toLocaleDateString('en-US', {
+      weekday: 'short', month: 'short', day: 'numeric', timeZone: 'UTC',
+    });
+    const isoDate = b.data.date.toISOString().split('T')[0];
+    return { Content, dateStr, isoDate };
+  })
+);
+---
+<Broadsheet title={`${labels[cat]} — Broadsheet`}>
+  <h2 class="page-heading">{labels[cat]}</h2>
+  {rendered.length === 0 && (
+    <p class="empty-state">No items yet in this section. Check back tomorrow.</p>
+  )}
+  {rendered.map(({ Content, dateStr, isoDate }) => (
+    <section class="brief-section">
+      <a href={`/issues/${isoDate}`} class="dateline-small">{dateStr}</a>
+      <Content />
+    </section>
+  ))}
+</Broadsheet>

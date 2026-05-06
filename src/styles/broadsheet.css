@@ -1,0 +1,298 @@
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;0,6..72,800;1,6..72,400;1,6..72,500&display=swap');
+
+:root {
+  --paper: #F4F1EA;
+  --ink: #1A1A1A;
+  --ink-soft: #444;
+  --ink-faint: #6E6A60;
+  --red: #A33A33;
+  --rule: #C4BFB4;
+  --rule-strong: #888070;
+  --max-width: 720px;
+  --page-width: 960px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Newsreader', Georgia, 'Times New Roman', serif;
+  font-size: 18px;
+  line-height: 1.55;
+  font-feature-settings: "kern", "liga", "onum";
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--red);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color 120ms ease;
+}
+a:hover { color: var(--red); }
+
+/* MASTHEAD */
+.masthead {
+  border-bottom: 1px solid var(--rule);
+  padding: 40px 24px 0;
+  text-align: center;
+  max-width: var(--page-width);
+  margin: 0 auto;
+}
+.masthead h1 {
+  font-family: 'Newsreader', Georgia, serif;
+  font-weight: 800;
+  font-size: clamp(48px, 9vw, 96px);
+  line-height: 0.95;
+  margin: 0;
+  letter-spacing: -0.025em;
+}
+.masthead h1 a {
+  color: var(--ink);
+  text-decoration: none;
+}
+.masthead .tagline {
+  font-style: italic;
+  font-size: 16px;
+  color: var(--ink-soft);
+  margin: 12px 0 20px;
+  font-weight: 400;
+}
+.masthead .dateline {
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--red);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  padding: 10px 0;
+  margin-top: 8px;
+  font-weight: 500;
+}
+
+/* TABS */
+.tabs {
+  display: flex;
+  gap: 28px;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 18px 24px;
+  border-bottom: 2px solid var(--ink);
+  max-width: var(--page-width);
+  margin: 0 auto;
+}
+.tabs a {
+  font-family: 'Newsreader', serif;
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ink);
+  padding: 4px 0;
+  border-bottom: 2px solid transparent;
+  font-weight: 500;
+  margin-bottom: -2px;
+}
+.tabs a:hover { color: var(--red); }
+.tabs a.active {
+  border-bottom-color: var(--red);
+  color: var(--red);
+}
+
+/* MAIN */
+main {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 48px 24px 64px;
+}
+
+/* SKIM (lead pull) */
+.skim {
+  font-style: italic;
+  font-size: 19px;
+  line-height: 1.55;
+  border-left: 3px solid var(--red);
+  padding: 4px 0 4px 18px;
+  margin: 0 0 56px;
+  color: var(--ink-soft);
+}
+
+/* SECTIONS */
+.brief-section {
+  margin-bottom: 56px;
+}
+.brief-section + .brief-section {
+  border-top: 1px solid var(--rule);
+  padding-top: 40px;
+}
+
+.section-label {
+  font-family: 'Newsreader', serif;
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin: 0 0 24px;
+  font-weight: 600;
+}
+
+/* ITEMS (rendered from markdown) */
+.brief-section h3 {
+  font-family: 'Newsreader', serif;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1.22;
+  margin: 32px 0 14px;
+  letter-spacing: -0.01em;
+}
+.brief-section h3:first-child {
+  margin-top: 0;
+}
+
+.brief-section p {
+  margin: 0 0 14px;
+  font-size: 18px;
+  line-height: 1.65;
+}
+
+.brief-section em em {
+  font-style: normal;
+}
+
+/* drop cap on first paragraph after first headline of each section */
+.brief-section h3:first-of-type + p::first-letter {
+  font-size: 64px;
+  font-weight: 800;
+  line-height: 0.85;
+  float: left;
+  padding: 6px 8px 0 0;
+  font-family: 'Newsreader', Georgia, serif;
+  color: var(--ink);
+}
+
+/* note paragraph (italic — used for politics-imbalance disclaimer etc.) */
+.brief-section blockquote {
+  border-left: 2px solid var(--rule-strong);
+  margin: 0 0 24px;
+  padding: 4px 0 4px 16px;
+  font-style: italic;
+  color: var(--ink-faint);
+  font-size: 16px;
+}
+
+.brief-section blockquote p {
+  margin: 0;
+  font-size: 16px;
+}
+
+/* CATEGORY PAGE */
+.page-heading {
+  font-family: 'Newsreader', serif;
+  font-size: 36px;
+  font-weight: 700;
+  margin: 0 0 8px;
+  letter-spacing: -0.015em;
+  border-bottom: 2px solid var(--ink);
+  padding-bottom: 12px;
+  margin-bottom: 40px;
+}
+
+.empty-state {
+  font-style: italic;
+  color: var(--ink-faint);
+  font-size: 17px;
+  margin-top: 24px;
+}
+
+.dateline-small {
+  display: inline-block;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--red);
+  text-transform: uppercase;
+  text-decoration: none;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+.dateline-small:hover { text-decoration: underline; }
+
+/* ARCHIVE */
+.archive-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.archive-list li {
+  padding: 0;
+  border-bottom: 1px dotted var(--rule);
+}
+.archive-list li:last-child {
+  border-bottom: none;
+}
+.archive-list a {
+  text-decoration: none;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: baseline;
+  font-size: 17px;
+  padding: 14px 0;
+  color: var(--ink);
+}
+.archive-list a:hover { color: var(--red); }
+.archive-list .date {
+  color: var(--red);
+  letter-spacing: 0.12em;
+  font-size: 12px;
+  text-transform: uppercase;
+  flex-shrink: 0;
+  font-style: italic;
+}
+.archive-list .title {
+  font-weight: 500;
+}
+
+/* FOOTER */
+footer {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 32px 24px 48px;
+  text-align: center;
+  font-size: 13px;
+  font-style: italic;
+  color: var(--ink-faint);
+  border-top: 1px solid var(--rule);
+}
+footer a {
+  text-decoration-color: var(--rule-strong);
+  text-decoration-thickness: 1px;
+}
+
+/* MOBILE */
+@media (max-width: 640px) {
+  body { font-size: 17px; }
+  .masthead { padding: 24px 16px 0; }
+  .masthead h1 { font-size: 56px; line-height: 0.92; }
+  .masthead .tagline { font-size: 15px; margin: 8px 0 14px; }
+  .masthead .dateline { font-size: 11px; padding: 8px 0; }
+  .tabs { gap: 18px; padding: 14px 16px; }
+  .tabs a { font-size: 12px; letter-spacing: 0.12em; }
+  main { padding: 32px 18px 48px; }
+  .skim { font-size: 17px; margin-bottom: 40px; padding-left: 14px; }
+  .brief-section { margin-bottom: 40px; }
+  .brief-section + .brief-section { padding-top: 28px; }
+  .brief-section h3 { font-size: 21px; }
+  .brief-section p { font-size: 17px; line-height: 1.62; }
+  .brief-section h3:first-of-type + p::first-letter {
+    font-size: 56px;
+  }
+  .page-heading { font-size: 28px; margin-bottom: 28px; }
+  .archive-list a { font-size: 16px; flex-direction: column; gap: 4px; }
+  .archive-list .date { font-size: 11px; }
+}
