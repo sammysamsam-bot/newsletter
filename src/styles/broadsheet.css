@@ -153,6 +153,54 @@ main {
   color: var(--ink);
 }
 
+/* CONCEPT GROUPS — bold mini-header above bullets/paragraphs */
+.brief-section h4 {
+  font-family: 'Newsreader', serif;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 28px 0 10px;
+  line-height: 1.4;
+}
+/* Fallback: a paragraph whose only content is bold renders as a mini-header too */
+.brief-section p > strong:only-child {
+  font-family: 'Newsreader', serif;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.brief-section p:has(> strong:only-child) {
+  margin: 28px 0 10px;
+  line-height: 1.4;
+}
+
+/* BULLETS */
+.brief-section ul {
+  margin: 0 0 18px;
+  padding-left: 22px;
+  list-style: none;
+}
+.brief-section ul li {
+  position: relative;
+  margin: 0 0 10px;
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--ink);
+}
+.brief-section ul li::before {
+  content: "—";
+  position: absolute;
+  left: -22px;
+  color: var(--rule-strong);
+}
+.brief-section ul ul {
+  margin: 8px 0 0;
+}
+
 /* DUAL-VIEW: blockquote = the "summary with context" lead.
    The full body paragraphs follow as breakdown. */
 .brief-section blockquote {
