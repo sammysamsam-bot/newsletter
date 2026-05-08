@@ -33,7 +33,7 @@ export async function GET(context: APIContext) {
   return rss({
     title: 'Broadsheet',
     description: 'A daily editorial — curated by Sam.',
-    site: context.site ?? 'https://broadsheet.netlify.app',
+    site: context.site ?? 'https://broadsheet-news.netlify.app',
     items,
   });
 }
