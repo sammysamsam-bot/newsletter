@@ -1,0 +1,35 @@
+/* Print layer for the newsletter PDF (Chrome --print-to-pdf). Turns the screen
+   reading page into a clean printed brief on the light (Clay · Slate) palette. */
+
+@media print {
+  html, body {
+    background: #FFFFFF !important;
+    color: var(--ink) !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    font-size: 11pt;
+  }
+  @page { margin: 16mm 18mm; }
+
+  /* screen chrome off the page */
+  .tabs, footer, .dateline-small, [data-print="hide"] { display: none !important; }
+
+  main { max-width: none !important; padding: 0 !important; margin: 0 !important; }
+
+  /* masthead → printed nameplate with a firm rule */
+  .masthead {
+    max-width: none !important;
+    border-bottom: 2px solid var(--ink) !important;
+    padding: 0 0 10px !important;
+    margin: 0 0 24px !important;
+  }
+  .masthead .dateline { color: var(--ink) !important; }
+
+  /* don't strand a heading at a page break */
+  .section-label, .page-heading { break-after: avoid; }
+  .brief-section h3 { break-after: avoid; }
+  .brief-section h3 + p, .brief-section h3 + blockquote { break-before: avoid; }
+  p { orphans: 3; widows: 3; }
+
+  a, .brief-section a { color: var(--ink) !important; }
+}

@@ -1,327 +1,182 @@
-@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;0,6..72,800;1,6..72,400;1,6..72,500&display=swap');
+/* The newsletter's skin — built on the openclaw house design system
+   (Clay · Slate / Forest). Tokens / base / components / print are vendored from
+   authoring/design/; this file is the newsletter's own reading layout on top.
+   Reading surface → defaults to the light (Clay · Slate) mode via
+   <html data-theme="light"> in Broadsheet.astro. See VISUAL-LANGUAGE.md. */
+@import './tokens.css';
+@import './base.css';
+@import './components.css';
+@import './print.css';
 
-:root {
-  --paper: #F4F1EA;
-  --ink: #1A1A1A;
-  --ink-soft: #3A3A36;
-  --ink-faint: #6E6A60;
-  --red: #A33A33;
-  --rule: #C4BFB4;
-  --rule-strong: #888070;
-  --max-width: 720px;
-  --page-width: 920px;
-}
+/* Reading ergonomics: the body type runs larger than UI base. */
+:root { --read: 18px; --read-lead: 1.72; }
 
-* { box-sizing: border-box; }
-
-html, body {
-  margin: 0;
-  padding: 0;
-  background: var(--paper);
-  color: var(--ink);
-  font-family: 'Newsreader', Georgia, 'Times New Roman', serif;
-  font-size: 19px;
-  line-height: 1.7;
-  font-feature-settings: "kern", "liga", "onum";
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-}
-
-a {
-  color: var(--ink);
-  text-decoration: underline;
-  text-decoration-color: var(--red);
-  text-decoration-thickness: 1px;
-  text-underline-offset: 3px;
-  transition: color 120ms ease;
-}
-a:hover { color: var(--red); }
-
-/* MASTHEAD — restrained, lets words breathe */
+/* MASTHEAD */
 .masthead {
-  border-bottom: 1px solid var(--rule);
-  padding: 28px 24px 14px;
   text-align: center;
+  padding: var(--space-6) var(--space-4) var(--space-4);
+  border-bottom: 1px solid var(--border);
   max-width: var(--page-width);
   margin: 0 auto;
 }
 .masthead h1 {
-  font-family: 'Newsreader', Georgia, serif;
+  font-size: clamp(30px, 5vw, 44px);
   font-weight: 700;
-  font-size: clamp(32px, 5vw, 48px);
-  line-height: 1;
-  margin: 0;
   letter-spacing: -0.02em;
+  margin: 0;
+  line-height: 1;
 }
-.masthead h1 a {
-  color: var(--ink);
-  text-decoration: none;
-}
+.masthead h1 a { color: var(--ink); text-decoration: none; }
 .masthead .dateline {
-  font-size: 11px;
-  letter-spacing: 0.18em;
+  margin-top: var(--space-3);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-kicker, 0.22em);
   text-transform: uppercase;
-  color: var(--red);
-  margin-top: 14px;
-  font-weight: 500;
+  color: var(--clay);
+  font-weight: 600;
 }
 
-/* TABS */
+/* TABS — nav. Styled by components.css (.tabs); just center + bound it here. */
 .tabs {
-  display: flex;
-  gap: 22px;
   justify-content: center;
   flex-wrap: wrap;
-  padding: 14px 24px;
-  border-bottom: 1px solid var(--rule);
+  gap: var(--space-4);
+  padding: var(--space-3) var(--space-4);
   max-width: var(--page-width);
   margin: 0 auto;
 }
-.tabs a {
-  font-family: 'Newsreader', serif;
-  font-size: 13px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: var(--ink-soft);
-  padding: 4px 0;
-  border-bottom: 1px solid transparent;
-  font-weight: 400;
-  margin-bottom: -1px;
-}
-.tabs a:hover { color: var(--red); }
-.tabs a.active {
-  border-bottom-color: var(--red);
-  color: var(--red);
-  font-weight: 500;
-}
 
-/* MAIN */
+/* MAIN reading column */
 main {
-  max-width: var(--max-width);
+  max-width: var(--measure);
   margin: 0 auto;
-  padding: 48px 24px 72px;
+  padding: var(--space-6) var(--space-4) var(--space-7);
 }
 
-/* SKIM (lead pull) — quieter */
+/* SKIM — the lead pull */
 .skim {
+  font-size: var(--text-md);
+  line-height: var(--leading-snug);
+  color: var(--muted);
+  border-left: 2px solid var(--clay);
+  padding-left: var(--space-3);
+  margin: 0 0 var(--space-6);
   font-style: italic;
-  font-size: 19px;
-  line-height: 1.6;
-  border-left: 2px solid var(--red);
-  padding: 2px 0 2px 16px;
-  margin: 0 0 56px;
-  color: var(--ink-soft);
 }
 
 /* SECTIONS */
-.brief-section {
-  margin-bottom: 56px;
-}
+.brief-section { margin-bottom: var(--space-6); }
 .brief-section + .brief-section {
-  border-top: 1px solid var(--rule);
-  padding-top: 40px;
+  border-top: 1px solid var(--border);
+  padding-top: var(--space-5);
 }
-
 .section-label {
-  font-family: 'Newsreader', serif;
-  font-size: 11px;
-  letter-spacing: 0.22em;
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-label);
   text-transform: uppercase;
-  color: var(--red);
-  margin: 0 0 28px;
-  font-weight: 500;
+  color: var(--clay);
+  font-weight: 600;
+  margin: 0 0 var(--space-4);
 }
 
-/* ITEMS — generous spacing for reading */
+/* STORY CONTENT (rendered markdown) */
 .brief-section h3 {
-  font-family: 'Newsreader', serif;
-  font-weight: 700;
-  font-size: 22px;
-  line-height: 1.3;
-  margin: 40px 0 16px;
-  letter-spacing: -0.005em;
+  font-size: var(--text-xl);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: var(--leading-tight);
+  margin: var(--space-5) 0 var(--space-3);
+  color: var(--ink);
 }
-.brief-section h3:first-child {
-  margin-top: 0;
-}
-
+.brief-section h3:first-child { margin-top: 0; }
 .brief-section p {
-  margin: 0 0 16px;
-  font-size: 19px;
-  line-height: 1.7;
+  font-size: var(--read);
+  line-height: var(--read-lead);
+  margin: 0 0 var(--space-3);
   color: var(--ink);
 }
+.brief-section a { color: var(--green); text-decoration: underline; text-underline-offset: 2px; }
+.brief-section a:hover { color: var(--clay); }
 
-/* CONCEPT GROUPS — bold mini-header above bullets/paragraphs */
-.brief-section h4 {
-  font-family: 'Newsreader', serif;
-  font-weight: 600;
-  font-size: 13px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
-  margin: 28px 0 10px;
-  line-height: 1.4;
-}
-/* Fallback: a paragraph whose only content is bold renders as a mini-header too */
+/* concept mini-headers */
+.brief-section h4,
 .brief-section p > strong:only-child {
-  font-family: 'Newsreader', serif;
+  font-size: var(--text-xs);
   font-weight: 600;
-  font-size: 13px;
-  letter-spacing: 0.18em;
+  letter-spacing: var(--tracking-label);
   text-transform: uppercase;
-  color: var(--ink-soft);
+  color: var(--muted);
 }
-.brief-section p:has(> strong:only-child) {
-  margin: 28px 0 10px;
-  line-height: 1.4;
-}
+.brief-section h4 { margin: var(--space-4) 0 var(--space-2); }
 
-/* BULLETS */
-.brief-section ul {
-  margin: 0 0 18px;
-  padding-left: 22px;
-  list-style: none;
-}
-.brief-section ul li {
-  position: relative;
-  margin: 0 0 10px;
-  font-size: 18px;
-  line-height: 1.65;
-  color: var(--ink);
-}
-.brief-section ul li::before {
-  content: "—";
-  position: absolute;
-  left: -22px;
-  color: var(--rule-strong);
-}
-.brief-section ul ul {
-  margin: 8px 0 0;
-}
+/* bullets — em-dash in clay */
+.brief-section ul { list-style: none; margin: 0 0 var(--space-3); padding-left: var(--space-4); }
+.brief-section ul li { position: relative; font-size: var(--read); line-height: var(--leading-body); margin-bottom: var(--space-2); color: var(--ink); }
+.brief-section ul li::before { content: "—"; position: absolute; left: calc(-1 * var(--space-4)); color: var(--clay); }
 
-/* DUAL-VIEW: blockquote = the "summary with context" lead.
-   The full body paragraphs follow as breakdown. */
+/* DUAL-VIEW: blockquote = the summary lede, body paragraphs = breakdown */
 .brief-section blockquote {
-  border-left: 2px solid var(--rule-strong);
-  margin: 0 0 24px;
-  padding: 2px 0 2px 16px;
-  color: var(--ink-soft);
+  border-left: 2px solid var(--clay);
+  margin: 0 0 var(--space-4);
+  padding-left: var(--space-3);
 }
 .brief-section blockquote p {
-  margin: 0 0 10px;
-  font-size: 17px;
-  line-height: 1.65;
+  font-size: var(--text-md);
+  line-height: var(--leading-snug);
+  color: var(--muted);
   font-style: italic;
+  margin-bottom: var(--space-2);
 }
-.brief-section blockquote p:last-child { margin-bottom: 0; }
-.brief-section blockquote strong {
-  font-style: normal;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  color: var(--ink);
-}
+.brief-section blockquote strong { font-style: normal; font-weight: 600; color: var(--ink); }
 
-/* CATEGORY PAGE HEADING */
+/* CATEGORY PAGE + ARCHIVE + STATES */
 .page-heading {
-  font-family: 'Newsreader', serif;
-  font-size: 28px;
+  font-size: var(--text-2xl);
   font-weight: 700;
-  margin: 0 0 8px;
-  letter-spacing: -0.01em;
-  border-bottom: 1px solid var(--ink);
-  padding-bottom: 14px;
-  margin-bottom: 40px;
+  letter-spacing: -0.02em;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: var(--space-3);
+  margin: 0 0 var(--space-5);
 }
-
-.empty-state {
-  font-style: italic;
-  color: var(--ink-faint);
-  font-size: 17px;
-  margin-top: 24px;
-}
-
+.empty-state { color: var(--muted); font-style: italic; }
 .dateline-small {
   display: inline-block;
-  font-size: 11px;
-  letter-spacing: 0.16em;
-  color: var(--red);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-label);
   text-transform: uppercase;
+  color: var(--clay);
   text-decoration: none;
-  margin-bottom: 18px;
-  font-weight: 500;
+  font-weight: 600;
+  margin-bottom: var(--space-4);
 }
 .dateline-small:hover { text-decoration: underline; }
 
-/* ARCHIVE */
-.archive-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-.archive-list li {
-  padding: 0;
-  border-bottom: 1px dotted var(--rule);
-}
-.archive-list li:last-child {
-  border-bottom: none;
-}
+.archive-list { list-style: none; padding: 0; margin: 0; }
+.archive-list li { border-bottom: 1px solid var(--border); }
+.archive-list li:last-child { border-bottom: none; }
 .archive-list a {
-  text-decoration: none;
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  align-items: baseline;
-  font-size: 17px;
-  padding: 14px 0;
-  color: var(--ink);
+  display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-4);
+  padding: var(--space-3) 0; text-decoration: none; color: var(--ink); font-size: var(--text-md);
 }
-.archive-list a:hover { color: var(--red); }
-.archive-list .date {
-  color: var(--red);
-  letter-spacing: 0.12em;
-  font-size: 12px;
-  text-transform: uppercase;
-  flex-shrink: 0;
-  font-style: italic;
-}
-.archive-list .title {
-  font-weight: 500;
-}
+.archive-list a:hover { color: var(--clay); }
+.archive-list .date { color: var(--clay); font-size: var(--text-xs); letter-spacing: 0.08em; text-transform: uppercase; flex-shrink: 0; }
+.archive-list .title { font-weight: 500; }
 
 /* FOOTER */
 footer {
-  max-width: var(--max-width);
+  max-width: var(--measure);
   margin: 0 auto;
-  padding: 32px 24px 48px;
+  padding: var(--space-5) var(--space-4) var(--space-6);
   text-align: center;
-  font-size: 13px;
-  font-style: italic;
-  color: var(--ink-faint);
-  border-top: 1px solid var(--rule);
-}
-footer a {
-  text-decoration-color: var(--rule-strong);
-  text-decoration-thickness: 1px;
+  font-size: var(--text-sm);
+  color: var(--muted);
+  border-top: 1px solid var(--border);
 }
 
 /* MOBILE */
 @media (max-width: 640px) {
-  body { font-size: 18px; line-height: 1.65; }
-  .masthead { padding: 22px 16px 12px; }
-  .masthead h1 { font-size: 32px; }
-  .masthead .dateline { font-size: 10px; margin-top: 12px; }
-  .tabs { gap: 16px; padding: 12px 16px; }
-  .tabs a { font-size: 12px; letter-spacing: 0.06em; }
-  main { padding: 32px 18px 48px; }
-  .skim { font-size: 17px; margin-bottom: 40px; padding-left: 14px; }
-  .brief-section { margin-bottom: 40px; }
-  .brief-section + .brief-section { padding-top: 28px; }
-  .brief-section h3 { font-size: 20px; margin-top: 32px; }
-  .brief-section p { font-size: 18px; line-height: 1.65; }
-  .brief-section blockquote p { font-size: 16px; }
-  .page-heading { font-size: 24px; margin-bottom: 28px; }
-  .archive-list a { font-size: 16px; flex-direction: column; gap: 4px; }
-  .archive-list .date { font-size: 11px; }
+  :root { --read: 17px; }
+  .masthead { padding: var(--space-5) var(--space-3) var(--space-3); }
+  main { padding: var(--space-5) var(--space-3) var(--space-6); }
+  .brief-section h3 { font-size: var(--text-lg); }
 }

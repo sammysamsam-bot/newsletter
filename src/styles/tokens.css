@@ -1,0 +1,115 @@
+/* ============================================================================
+   openclaw design tokens — the house visual language.
+   ----------------------------------------------------------------------------
+   Clay · Slate / Forest: an earthy, botanical system. Terracotta clay is the
+   constant signature (primary action); a green/teal is the cool secondary
+   (status, links). DARK (Forest) is the default — :root. LIGHT (Clay · Slate)
+   is the alternate — [data-theme="light"].
+
+   Every surface and styleguide.html consume these. Edit here to mature the look.
+   See authoring/design/VISUAL-LANGUAGE.md.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ---- DARK (Forest) — the default ----------------------------------------- */
+:root {
+  --bg: #15201A;            /* page canvas — deep forest                      */
+  --surface: #1D2A22;       /* cards / panels                                */
+  --raised: #243429;        /* insets, tool rows, hovered surfaces           */
+  --ink: #E4EBE2;           /* primary text                                  */
+  --muted: #8CA08F;         /* secondary text                                */
+  --faint: #5E7064;         /* tertiary text, disabled                       */
+  --border: #2A3B32;        /* hairlines                                     */
+
+  --clay: #E0894F;          /* PRIMARY action — the signature terracotta     */
+  --clay-fg: #1B1206;       /* text on clay fills                            */
+  --clay-soft: rgba(224,137,79,.15);
+  --green: #6FBF8A;         /* SECONDARY — status, links, the cool accent    */
+  --green-fg: #06210F;      /* text on green fills                           */
+  --green-soft: rgba(111,191,138,.14);
+
+  /* ---- semantic state ----------------------------------------------------- */
+  --success: #6FBF8A;  --success-soft: rgba(111,191,138,.14);
+  --warning: #E0B24F;  --warning-soft: rgba(224,178,79,.15);
+  --danger:  #E06A57;  --danger-soft:  rgba(224,106,87,.15);  --danger-fg: #2A0E08;
+
+  /* ---- elevation (dark leans on borders + soft ambient shadow) ------------ */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.35);
+  --shadow-md: 0 6px 22px -8px rgba(0,0,0,.5);
+  --shadow-lg: 0 18px 50px -16px rgba(0,0,0,.62);
+
+  /* ---- focus ring (>=3:1 vs surface, never removed) ----------------------- */
+  --focus: 0 0 0 2px var(--bg), 0 0 0 4px var(--green);
+
+  /* ---- motion ------------------------------------------------------------- */
+  --dur-fast: 120ms;
+  --dur-base: 200ms;
+  --dur-slow: 320ms;
+  --ease: cubic-bezier(.2,.6,.2,1);   /* standard ease-out                    */
+  --ease-in: cubic-bezier(.4,0,1,1);
+
+  /* ---- type --------------------------------------------------------------- */
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --text-xs: 11px;          /* mono labels, meta, eyebrows                   */
+  --text-sm: 13px;          /* secondary / dense                            */
+  --text-base: 15px;        /* body                                          */
+  --text-md: 17px;          /* lead / large body                            */
+  --text-lg: 19px;          /* card titles                                  */
+  --text-xl: 24px;          /* section headings                             */
+  --text-2xl: 34px;         /* page title                                   */
+
+  --leading-tight: 1.15;
+  --leading-snug: 1.4;
+  --leading-body: 1.6;
+  --tracking-label: 0.12em; /* all-caps eyebrows / kickers                   */
+  --tracking-tight: -0.02em;/* large headings                               */
+
+  /* ---- spacing (8px base) ------------------------------------------------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 14px;
+  --space-4: 24px;
+  --space-5: 40px;
+  --space-6: 56px;
+  --space-7: 72px;
+
+  /* ---- radius ------------------------------------------------------------- */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  /* ---- layout & motion ---------------------------------------------------- */
+  --measure: 720px;         /* reading column                               */
+  --page-width: 1080px;     /* app / chrome width                           */
+  --transition: 120ms ease;
+}
+
+/* ---- LIGHT (Clay · Slate) — the alternate -------------------------------- */
+[data-theme="light"] {
+  --bg: #ECEEEC;            /* cool stone canvas                            */
+  --surface: #FFFFFF;
+  --raised: #F5F7F6;
+  --ink: #222827;
+  --muted: #646D6B;
+  --faint: #97A09D;
+  --border: #DADFDC;
+
+  --clay: #BB5E3C;          /* terracotta — deeper for light                */
+  --clay-fg: #FFFFFF;
+  --clay-soft: rgba(187,94,60,.12);
+  --green: #3E6E72;         /* slate-teal — the cool secondary in light     */
+  --green-fg: #FFFFFF;
+  --green-soft: rgba(62,110,114,.12);
+
+  --success: #2F8F5B;  --success-soft: rgba(47,143,91,.12);
+  --warning: #B5832B;  --warning-soft: rgba(181,131,43,.13);
+  --danger:  #C0492E;  --danger-soft:  rgba(192,73,46,.11);  --danger-fg: #FFFFFF;
+
+  --shadow-sm: 0 1px 2px rgba(20,30,25,.07);
+  --shadow-md: 0 6px 22px -10px rgba(20,30,25,.18);
+  --shadow-lg: 0 18px 50px -18px rgba(20,30,25,.24);
+}
