@@ -31,9 +31,9 @@ export async function GET(context: APIContext) {
     });
 
   return rss({
-    title: 'Broadsheet',
+    title: "Sam's Newsletter",
     description: 'A daily editorial — curated by Sam.',
-    site: context.site ?? 'https://broadsheet-news.netlify.app',
+    site: context.site ?? 'https://sammybots-macbook-pro.tail5e4166.ts.net:8443',
     items,
   });
 }

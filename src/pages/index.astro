@@ -42,7 +42,7 @@ const rendered = await Promise.all(
   })
 );
 ---
-<Broadsheet title="Broadsheet" date={formattedDate}>
+<Broadsheet title="Sam's Newsletter" date={formattedDate}>
   {skim && <p class="skim">{skim}</p>}
   {rendered.length === 0 && (
     <p class="empty-state">No briefs published yet.</p>

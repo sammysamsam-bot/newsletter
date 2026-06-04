@@ -7,7 +7,7 @@ interface Props {
   description?: string;
 }
 
-const { title = "Broadsheet", date, description = "A daily editorial — curated by Sam." } = Astro.props;
+const { title = "Sam's Newsletter", date, description = "A daily editorial — curated by Sam." } = Astro.props;
 const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
 
 const tabs = [
@@ -33,12 +33,12 @@ function isActive(href: string) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content={description} />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="alternate" type="application/rss+xml" title="Broadsheet" href="/feed.xml" />
+  <link rel="alternate" type="application/rss+xml" title="Sam's Newsletter" href="/feed.xml" />
   <title>{title}</title>
 </head>
 <body>
   <header class="masthead">
-    <h1><a href="/">Broadsheet</a></h1>
+    <h1><a href="/">Sam's Newsletter</a></h1>
     {date && <div class="dateline">{date}</div>}
   </header>
   <nav class="tabs">

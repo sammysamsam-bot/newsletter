@@ -42,7 +42,7 @@ const rendered = await Promise.all(
   })
 );
 ---
-<Broadsheet title={`${formattedDate} — Broadsheet`} date={formattedDate}>
+<Broadsheet title={`${formattedDate} — Sam's Newsletter`} date={formattedDate}>
   {skim && <p class="skim">{skim}</p>}
   {rendered.map(({ brief, Content }) => (
     <section class="brief-section">
