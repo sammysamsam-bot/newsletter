@@ -1,7 +1,9 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://sammybots-macbook-pro.tail5e4166.ts.net:8443',
+  // Public canonical face of the broadsheet (Vercel). Also served privately
+  // over Tailscale via apphost; Vercel is the canonical URL for RSS/links.
+  site: 'https://newsletter-pink-beta.vercel.app',
   trailingSlash: 'never',
   build: {
     format: 'directory',
